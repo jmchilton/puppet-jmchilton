@@ -16,4 +16,6 @@ describe 'jmchilton' do
                     ['certname=jmchilton'])
   end
 
+  it { should include_class('jenkins') }
+
 end

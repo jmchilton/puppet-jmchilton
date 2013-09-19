@@ -8,4 +8,8 @@ node 'jmchilton' {
     certname => 'jmchilton',
   }
 
+  class { 'jenkins':
+    
+  }
+
 }
