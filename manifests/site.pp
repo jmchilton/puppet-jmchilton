@@ -13,8 +13,7 @@ node 'jmchilton' {
   class { 'linode':
   }
 
-  class { 'jenkins':
-    
-  }
+  #class { 'jenkins':    
+  #}
 
 }
