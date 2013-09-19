@@ -8,6 +8,9 @@ node 'jmchilton' {
     certname => 'jmchilton',
   }
 
+  class { 'linode':
+  }
+
   class { 'jenkins':
     
   }
