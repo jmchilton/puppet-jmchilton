@@ -16,4 +16,8 @@ node 'jmchilton' {
   #class { 'jenkins':    
   #}
 
+  class { 'mysql::server':
+    config_hash => { 'root_password' => extlookup('mysql_root_password') }
+  }
+
 }
