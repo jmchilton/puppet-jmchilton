@@ -1,3 +1,5 @@
+$extlookup_datadir = "/data/puppet"
+$extlookup_precedence = [$environment, 'credentials']
 
 node 'jmchilton' {
 
