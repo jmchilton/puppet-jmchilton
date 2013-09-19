@@ -1,6 +1,6 @@
 class puppet(
   $certname,
-  $puppet_server = "puppet.jmchilton.net",
+  $puppet_server = "puppet.jmchilton.net"
 ) {
 
   file { '/etc/default/puppet' : 
