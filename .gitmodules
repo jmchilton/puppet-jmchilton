@@ -16,3 +16,6 @@
 [submodule "modules/concat"]
 	path = modules/concat
 	url = git://github.com/puppetlabs/puppetlabs-concat.git
+[submodule "modules/vcsrpeo"]
+	path = modules/vcsrpeo
+	url = git://github.com/puppetlabs/puppetlabs-vcsrepo.git

@@ -4,7 +4,6 @@ $extlookup_precedence = [$environment, 'credentials']
 $data_dir = '/data'
 $web_dir = '/usr/share/www'
 
-
 node 'jmchilton' {
 
   class { 'puppet::master':
@@ -24,7 +23,7 @@ node 'jmchilton' {
 
   class { 'mysql::server':
     config_hash => { 'root_password' => extlookup('mysql_root_password', 'defaultPass'),
-                     'data_dir' => '/data/mysql' }
+                     'datadir' => '/data/mysql' }
   }
 
   file { $web_dir:
@@ -63,5 +62,8 @@ node 'jmchilton' {
   apache::mod { 'rewrite': }
   apache::mod { 'proxy': }
   apache::mod { 'proxy_html': }
+
+  class { 'site':
+  }
 
 }
