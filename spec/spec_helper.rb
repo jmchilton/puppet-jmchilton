@@ -4,7 +4,8 @@ require 'rspec-puppet'
 
 def verify_contents(subject, title, expected_lines)
   content = subject.resource('file', title).send(:parameters)[:content]
-  (content.split("\n") & expected_lines).should == expected_lines
+  #puts content
+  (content.split("\n") & expected_lines).sort.should == expected_lines.sort
 end
 
 PARENT_DIR=File.join(File.dirname(__FILE__), "..")
