@@ -5,6 +5,8 @@ $data_dir = '/data'
 $web_dir = '/usr/share/www'
 
 node 'jmchilton' {
+  # TODO: Create a john user.
+  # Add my commmon packages: emacs23-nox, wajig.
 
   class { 'puppet::master':
   }

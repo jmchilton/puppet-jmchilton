@@ -5,14 +5,13 @@ class site(
   user { "jmchilton":
     ensure => present,
     comment => "www user for jmchilton.net",
-    gid => "jmchilton",
     membership => minimum,
     shell => "/bin/bash",
     home => "/usr/share/jmchilton",
   }
 
   exec { "jmchilton homedir":
-    command => "/bin/cp -R /etc/skel /usr/share/jmchilton; /bin/chown -R jmchilton:jmchilton /usr/share/jmchilton",
+    command => "/bin/cp -R /etc/skel /usr/share/jmchilton; /bin/chown -R jmchilton /usr/share/jmchilton",
     creates => "/usr/share/jmchilton",
     require => User["jmchilton"],
   }
