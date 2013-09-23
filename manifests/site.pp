@@ -7,9 +7,13 @@ $web_dir = '/usr/share/www'
 node 'jmchilton' {
   # TODO: Create a john user.
   # TODO: Add my commmon packages: emacs23-nox, wajig.
+  # TODO: sudo configuration.
   # TODO: /data/msyql  needs to be owned by mysql, may not be if gid/uid is changed.
   # TODO: Init script for clojure webapp.
   # TODO: fstab+mounts handling (https://github.com/AlexCline/puppet-mounts)
+  # TODO: Migrate jenkins database+jobs data to /data so it survives server rebuilds.
+  # TODO: nagios configuration.
+
 
   class { 'puppet::master':
   }
@@ -50,7 +54,7 @@ node 'jmchilton' {
 
   $root_apache_directories = [
     {path => "$data_dir/sqlinject"},
-    {path => "$data_dir/blog"}
+    {path => "$data_dir/blog"},
     {path => $web_dir, allow_override => "all"}
   ]
 
