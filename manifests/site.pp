@@ -54,6 +54,7 @@ node 'jmchilton' {
   class { 'apache': 
     default_vhost  => false,
     default_mods => false,
+    mpm_module => 'prefork',
   }
 
   apache::vhost { 'jmchilton.net':
@@ -65,10 +66,21 @@ node 'jmchilton' {
     require        => File["$web_dir/.htaccess"],
   }
 
-  apache::mod { 'rewrite': }
-  apache::mod { 'proxy': }
-  # apache::mod { 'proxy_html': }
-  apache::mod { 'php5': }
+  include apache::mod::rewrite
+  include apache::mod::proxy
+  include apache::mod::mime
+  include apache::mod::dir
+  include apache::mod::alias
+
+  include apache::mod::php
+
+  package {"php5":
+  }
+
+  package {"php5-mysql":
+  }
+
+
 
   class { 'site':
   }
