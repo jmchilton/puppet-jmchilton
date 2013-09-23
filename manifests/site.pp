@@ -51,6 +51,7 @@ node 'jmchilton' {
   $root_apache_directories = [
     {path => "$data_dir/sqlinject"},
     {path => "$data_dir/blog"}
+    {path => $web_dir, allow_override => "all"}
   ]
 
   class { 'apache': 
@@ -70,6 +71,8 @@ node 'jmchilton' {
 
   include apache::mod::rewrite
   include apache::mod::proxy
+  include apache::mod::proxy_http
+  include apache::mod::proxy_html
   include apache::mod::mime
   include apache::mod::dir
   include apache::mod::alias
