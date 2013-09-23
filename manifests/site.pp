@@ -67,7 +67,7 @@ node 'jmchilton' {
   apache::mod { 'rewrite': }
   apache::mod { 'proxy': }
   # apache::mod { 'proxy_html': }
-  apache::mode { 'php': }
+  apache::mod { 'php': }
 
   class { 'site':
   }
