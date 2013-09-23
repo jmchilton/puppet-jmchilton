@@ -24,7 +24,7 @@ node 'jmchilton' {
   # Not working on Puppet 2.7.1 and Ubuntu 10.10.
   
   class { 'jenkins': 
-    config_hash => { 'PORT' => { 'value' => '9000' } },
+    config_hash => { 'HTTP_PORT' => { 'value' => '9000' } },
   }
 
   class { 'mysql::server':
