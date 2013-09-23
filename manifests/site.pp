@@ -53,6 +53,7 @@ node 'jmchilton' {
 
   class { 'apache': 
     default_vhost  => false,
+    default_mods => false,
   }
 
   apache::vhost { 'jmchilton.net':
@@ -67,7 +68,7 @@ node 'jmchilton' {
   apache::mod { 'rewrite': }
   apache::mod { 'proxy': }
   # apache::mod { 'proxy_html': }
-  apache::mod { 'php': }
+  apache::mod { 'php5': }
 
   class { 'site':
   }
