@@ -6,9 +6,10 @@ $web_dir = '/usr/share/www'
 
 node 'jmchilton' {
   # TODO: Create a john user.
-  # Add my commmon packages: emacs23-nox, wajig.
-
-  # /data/msyql  needs to be owned by mysql, may not be if gid/uid is changed.
+  # TODO: Add my commmon packages: emacs23-nox, wajig.
+  # TODO: /data/msyql  needs to be owned by mysql, may not be if gid/uid is changed.
+  # TODO: Init script for clojure webapp.
+  # TODO: fstab+mounts handling (https://github.com/AlexCline/puppet-mounts)
 
   class { 'puppet::master':
   }
@@ -74,12 +75,16 @@ node 'jmchilton' {
 
   include apache::mod::php
 
-  package {"php5":
+  package { 'php5':
   }
 
-  package {"php5-mysql":
+  # Needed by wordpress
+  package { 'php5-mysql':
   }
 
+  # Needed by sqlinject
+  package{ 'php5-sqlite':
+  }
 
 
   class { 'site':
