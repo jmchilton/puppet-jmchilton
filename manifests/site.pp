@@ -52,6 +52,7 @@ node 'jmchilton' {
   ]
 
   class { 'apache': 
+    default_vhost  => false,
   }
 
   apache::vhost { 'jmchilton.net':
