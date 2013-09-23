@@ -2,6 +2,8 @@
 class site(
 ) {
 
+  include lein
+
   user { "jmchilton":
     ensure => present,
     comment => "www user for jmchilton.net",
