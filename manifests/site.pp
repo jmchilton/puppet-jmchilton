@@ -23,7 +23,8 @@ node 'jmchilton' {
   }
 
   class { 'mysql::server':
-    config_hash => { 'root_password' => extlookup('mysql_root_password', 'defaultPass') }
+    config_hash => { 'root_password' => extlookup('mysql_root_password', 'defaultPass'),
+                     'data_dir' => '/data/mysql' }
   }
 
   file { $web_dir:
