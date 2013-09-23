@@ -8,6 +8,8 @@ node 'jmchilton' {
   # TODO: Create a john user.
   # Add my commmon packages: emacs23-nox, wajig.
 
+  # /data/msyql  needs to be owned by mysql, may not be if gid/uid is changed.
+
   class { 'puppet::master':
   }
 
@@ -40,8 +42,8 @@ node 'jmchilton' {
   }
 
   $root_apache_aliases = [
-    {alias => 'sqlinject', path => "$data_dir/sqlinject"},
-    {alias => 'blog', path => "$data_dir/blog"}
+    {alias => '/sqlinject', path => "$data_dir/sqlinject"},
+    {alias => '/blog', path => "$data_dir/blog"}
   ]
 
   $root_apache_directories = [
@@ -63,7 +65,8 @@ node 'jmchilton' {
 
   apache::mod { 'rewrite': }
   apache::mod { 'proxy': }
-  apache::mod { 'proxy_html': }
+  # apache::mod { 'proxy_html': }
+  apache::mode { 'php': }
 
   class { 'site':
   }
