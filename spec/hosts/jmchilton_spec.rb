@@ -29,8 +29,8 @@ describe 'jmchilton' do
 
   it "should set proxy pass for apache to jenkins" do
     verify_contents(subject, '25-jenkins.jmchilton.net.conf',
-      ['  ProxyPass        / localhost:9000/',
-       '  ProxyPassReverse / localhost:9000/',
+      ['  ProxyPass        / http://localhost:9000/',
+       '  ProxyPassReverse / http://localhost:9000/',
       ]
     )
   end
