@@ -15,4 +15,13 @@ class puppet(
     content => template('puppet/puppet.conf.erb'),
   }
 
+  file { '/usr/local/bin/update_puppet.bash':
+    content => template('puppet/update_puppet.bash.erb'),
+    mode    => 755,
+  }
+
+  sudo::conf { 'update_puppet_sudo':
+    content => 'ALL  ALL = (puppet) NOPASSWD: /usr/local/bin/update_puppet.bash'
+  }
+
 }
