@@ -1,3 +1,4 @@
+import "sitedefs.pp"
 $extlookup_datadir = "/data/puppet"
 $extlookup_precedence = [$environment, 'credentials']
 
@@ -6,6 +7,7 @@ $web_dir = '/usr/share/www'
 $jenkins_port = '9000'
 
 node 'jmchilton' {
+
   # TODO: Create a john user.
   # TODO: Add my commmon packages: emacs23-nox, wajig.
   # TODO: sudo configuration.
@@ -15,6 +17,7 @@ node 'jmchilton' {
   # TODO: Migrate jenkins database+jobs data to /data so it survives server rebuilds.
   # TODO: nagios configuration.
 
+  include dev_machine
 
   class { 'puppet::master':
   }
