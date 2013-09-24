@@ -30,7 +30,7 @@ class dev_machine {
       creates => '/usr/local/bin/lein',
       ;
 
-    'make lein executable':
+    'make git-remote-hg executable':
       command => '/bin/chmod +x /usr/local/bin/git-remote-hg',
       require => Exec['download lein'],
       ;
