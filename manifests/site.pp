@@ -7,15 +7,13 @@ $web_dir = '/usr/share/www'
 $jenkins_port = '9000'
 
 node 'jmchilton' {
-
   # TODO: Create a john user.
-  # TODO: Add my commmon packages: emacs23-nox, wajig.
-  # TODO: sudo configuration.
   # TODO: /data/msyql  needs to be owned by mysql, may not be if gid/uid is changed.
   # TODO: Init script for clojure webapp.
   # TODO: fstab+mounts handling (https://github.com/AlexCline/puppet-mounts)
   # TODO: Migrate jenkins database+jobs data to /data so it survives server rebuilds.
   # TODO: nagios configuration.
+  # TODO: Artifactory configuration.
 
   include dev_machine
 
@@ -101,7 +99,6 @@ node 'jmchilton' {
   # Needed by sqlinject
   package{ 'php5-sqlite':
   }
-
 
   class { 'site':
   }
