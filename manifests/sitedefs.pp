@@ -10,6 +10,16 @@ class dev_machine {
 
   }
 
+  package { 'subversion':
+  }
+
+  package { 'sqlite3':
+  }
+
+  # Packages needed for RVM.
+  package {['libbison-dev', 'ncurses-dev', 'automake', 'libtool', 'bison', 'libgdbm-dev', 'libffi-dev', 'libsqlite3-dev' ]:
+  }
+
 }
 
 class debian_base {
