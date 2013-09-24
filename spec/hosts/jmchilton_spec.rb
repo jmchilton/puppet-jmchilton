@@ -21,9 +21,17 @@ describe 'jmchilton' do
 
   it "should set up blog alias" do
     verify_contents(subject, '10-jmchilton.net.conf',
-        ['  Alias blog /data/blog',
-         '  Alias sqlinject /data/sqlinject'
+        ['  Alias /blog /data/blog',
+         '  Alias /sqlinject /data/sqlinject'
         ]
+    )
+  end
+
+  it "should set proxy pass for apache to jenkins" do
+    verify_contents(subject, '25-jenkins.jmchilton.net.conf',
+      ['  ProxyPass        / localhost:9000/',
+       '  ProxyPassReverse / localhost:9000/',
+      ]
     )
   end
 
