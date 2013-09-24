@@ -35,7 +35,7 @@ node 'jmchilton' {
 
   apache::vhost { 'jenkins.jmchilton.net':
     port           => '80',
-    proxy_dest     => "localhost:$jenkins_port",
+    proxy_dest     => "http://localhost:$jenkins_port",
     docroot        => $web_dir,
   }
 
