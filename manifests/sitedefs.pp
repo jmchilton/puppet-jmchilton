@@ -1,11 +1,26 @@
 
 class dev_machine {
-  include base
+  include debian_base
 
-  package {'git':
+  package { 'git':
+
   }
 
-  package {'mercurial':
+  package { 'mercurial':
+
+  }
+
+}
+
+class debian_base {
+  include base
+
+  package { 'emacs24-nox':
+
+  }
+
+  package { 'wajig':
+
   }
 
 }
