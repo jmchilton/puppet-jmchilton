@@ -27,7 +27,7 @@ class dev_machine {
     'download git-remote-hg':
       command => '/usr/bin/wget https://raw.github.com/felipec/git/fc/master/git-remote-hg.py -O git-remote-hg',
       cwd     => '/usr/local/bin',
-      creates => '/usr/local/bin/lein',
+      creates => '/usr/local/bin/git-remote-hg',
       ;
 
     'make git-remote-hg executable':
