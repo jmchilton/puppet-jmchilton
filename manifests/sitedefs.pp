@@ -32,7 +32,7 @@ class dev_machine {
 
     'make git-remote-hg executable':
       command => '/bin/chmod +x /usr/local/bin/git-remote-hg',
-      require => Exec['download lein'],
+      require => Exec['download git-remote-hg'],
       ;
   }
 
