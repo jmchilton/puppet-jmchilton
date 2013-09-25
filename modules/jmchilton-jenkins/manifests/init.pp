@@ -20,7 +20,7 @@ class jmchilton-jenkins() {
   }
 
   file { "/opt/jenkins-legacy/git-remote-hg":
-    source => "puppet:///modules/my/legacy-git-remote-hg",
+    source => "puppet:///modules/jmchilton-jenkins/legacy-git-remote-hg",
     mode   => 0755,
   }
 
