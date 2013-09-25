@@ -4,7 +4,6 @@ $extlookup_precedence = [$environment, 'credentials']
 
 $data_dir = '/data'
 $web_dir = '/usr/share/www'
-$jenkins_port = '9000'
 
 node 'jmchilton' {
   # TODO: Create a john user.
@@ -27,14 +26,7 @@ node 'jmchilton' {
   class { 'linode':
   }
 
-  class { 'jenkins': 
-    config_hash => { 'HTTP_PORT' => { 'value' => $jenkins_port } },
-  }
-
-  apache::vhost { 'jenkins.jmchilton.net':
-    port           => '80',
-    proxy_dest     => "http://localhost:$jenkins_port",
-    docroot        => $web_dir,
+  class { 'jmchilton-jenkins':
   }
 
   class { 'mysql::server':
