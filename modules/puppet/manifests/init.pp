@@ -20,8 +20,14 @@ class puppet(
     mode    => 755,
   }
 
+  # Allow anyone (jenkins) to refresh puppet and apply configuration.
   sudo::conf { 'update_puppet_sudo':
     content => 'ALL  ALL = (puppet) NOPASSWD: /usr/local/bin/update_puppet.bash'
   }
+
+  sudo::conf { 'run_puppet_sudo':
+    content => 'ALL  ALL = (ALL:ALL) NOPASSWD: /usr/bin/puppet agent -t'
+  }
+
 
 }
