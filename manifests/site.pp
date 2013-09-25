@@ -13,6 +13,7 @@ node 'jmchilton' {
   # TODO: Migrate jenkins database+jobs data to /data so it survives server rebuilds.
   # TODO: nagios configuration.
   # TODO: Artifactory configuration.
+  # TODO: Update apparmor with: /etc/apparmor.d/usr.sbin.mysqld->  /data/mysql/** rwk,
 
   include dev_machine
 
