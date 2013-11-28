@@ -61,6 +61,9 @@ class debian_base {
 
   }
 
+  package { 'zsh':
+  }
+
 }
 
 class base {
