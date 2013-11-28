@@ -6,14 +6,12 @@ $data_dir = '/data'
 $web_dir = '/usr/share/www'
 
 node 'jmchilton' {
-  # TODO: Create a john user.
-  # TODO: /data/msyql  needs to be owned by mysql, may not be if gid/uid is changed.
+  # TODO: Hard-code mysql uid or /data/msyql  needs to be owned by mysql, may not be if gid/uid is changed.
+  # TODO: Update apparmor with: /etc/apparmor.d/usr.sbin.mysqld->  /data/mysql/** rwk,
   # TODO: Init script for clojure webapp.
   # TODO: fstab+mounts handling (https://github.com/AlexCline/puppet-mounts)
   # TODO: Migrate jenkins database+jobs data to /data so it survives server rebuilds.
   # TODO: nagios configuration.
-  # TODO: Artifactory configuration.
-  # TODO: Update apparmor with: /etc/apparmor.d/usr.sbin.mysqld->  /data/mysql/** rwk,
 
   include dev_machine
 

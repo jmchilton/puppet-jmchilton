@@ -67,6 +67,23 @@ class base {
   
   class { 'sudo': }
 
+  user { 'john':
+    ensure  => 'present',
+    shell   => '/bin/zsh',
+    home    => '/home/john',
+    require => Group['john'],
+  }
+
+  group { 'john':
+    ensure  => 'present'
+  }
+
+  exec { 'john homedir':
+    command => "/bin/cp -R /etc/skel /home/john; /bin/chown -R john:john /home/john",
+    creates => "/home/john",
+    require => User["john"],
+  }
+
   sudo::conf { 'john':
     content => 'john    ALL=(ALL:ALL) ALL',
   }
