@@ -20,7 +20,10 @@ class dev_machine {
   package {['libbison-dev', 'ncurses-dev', 'automake', 'libtool', 'bison', 'libgdbm-dev', 'libffi-dev', 'libsqlite3-dev' ]:
   }
 
-  package {'curl':
+  package { 'curl':
+  }
+
+  package { 'libcurl4-openssl-dev':
   }
 
   exec {
@@ -34,6 +37,15 @@ class dev_machine {
       command => '/bin/chmod +x /usr/local/bin/git-remote-hg',
       require => Exec['download git-remote-hg'],
       ;
+  }
+
+  package { 'libssl-dev':
+  }
+
+  package { 'virtualenv':
+  }
+
+  package { 'python3':
   }
 
 }
