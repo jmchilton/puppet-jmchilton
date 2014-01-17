@@ -80,6 +80,15 @@ node 'jmchilton' {
 
   include apache::mod::php
 
+  class { 'galaxy':
+    id_secret => extlookup('gx_id_secret', 'changeme'),
+    master_api_key => extlookup('gx_id_secret', 'changeme'),
+  }
+
+  galaxy::instance { "gx1":
+    port => 10080,
+  }
+
   package { 'php5':
   }
 

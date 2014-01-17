@@ -48,6 +48,12 @@ class dev_machine {
   package { 'python3':
   }
 
+  package { 'python3-dev':
+  }
+
+  package { 'python-dev':
+  }
+
 }
 
 class debian_base {

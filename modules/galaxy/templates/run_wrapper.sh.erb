@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export GALAXY_ROOT="<%= $project_dir %>"
+export GALAXY_UNIVERSE_CONFIG_DIR="<%= $conf_dir %>"
+
+# TODO: Virtualenv
+
+cd $GALAXY_ROOT
+sh run.sh "$@"

@@ -45,4 +45,14 @@ describe 'jmchilton' do
 
   it { should include_class('jenkins') }
 
+  it { should include_class('galaxy') }
+  it { should contain_file('/usr/share/galaxy') }
+  it { should contain_file('/usr/share/galaxy/gx1/web') }
+  it { should contain_user('gx1').with( {
+    'home' => '/usr/share/galaxy/gx1',
+  } ) }
+  it { should contain_file('/usr/share/galaxy/gx1/config')
+  }
+
+
 end
