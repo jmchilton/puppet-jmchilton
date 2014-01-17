@@ -40,12 +40,14 @@ define galaxy::instance (
   }
 
   file { "$base_dir":
-    ensure => present,
+    ensure  => present,
+    owner   => "$name",
     require => [Exec["$name user homedir"]],
   }
 
   file { "$conf_dir":
-    ensure => directory,
+    ensure  => directory,
+    owner   => "$name",
     require => [
         File[$base_dir],
     ],
@@ -53,6 +55,7 @@ define galaxy::instance (
 
   file { "$conf_dir/000_universe_wsgi.DEFAULT.ini":
     ensure => 'link',
+    owner   => "$name",
     target => "$project_dir/universe_wsgi.ini.sample",
     require => [
         File[$conf_dir],
@@ -61,6 +64,7 @@ define galaxy::instance (
 
   file { "$conf_dir/200_puppet_instance_wsgi.ini":
     content => template('galaxy/instance_properties.ini.erb'),
+    owner   => "$name",
     require => [
         File[$conf_dir],
     ],
@@ -68,11 +72,13 @@ define galaxy::instance (
 
   file { "$conf_dir/100_puppet_site_wsgi.ini":
     ensure => 'link',
-    target => "/usr/share/galaxy/site_wsgi.ini"
+    target => "/usr/share/galaxy/site_wsgi.ini",
+    owner   => "$name",
   }
 
   file { $web_dir:
     ensure => directory,
+    owner   => "$name",
     require => [
         File[$base_dir],
     ]
@@ -80,6 +86,7 @@ define galaxy::instance (
 
   file { "$web_dir/htaccess":
     content => template('galaxy/htaccess.erb'),
+    owner   => "$name",
     require => [ File[$web_dir] ],
     mode    => 744,
   }
@@ -92,6 +99,7 @@ define galaxy::instance (
 
   file { "$base_dir/run.sh":
     content => template('galaxy/run_wrapper.sh.erb'),
+    owner   => "$name",
     require => [ File[$base_dir] ],
     mode    => 744,
   }
