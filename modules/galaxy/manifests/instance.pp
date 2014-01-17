@@ -91,9 +91,14 @@ define galaxy::instance (
     mode    => 744,
   }
 
+  $apache_directories = [
+    {path => $web_dir, allow_override => "all"},
+  ]
+
   apache::vhost { "${name}.jmchilton.net":
     port           => '80',
     docroot        => "$web_dir",
+    directories    => $apache_directories,
     require        => File[ "$web_dir/htaccess" ],
   }
 
