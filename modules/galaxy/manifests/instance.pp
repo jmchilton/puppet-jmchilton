@@ -19,7 +19,7 @@ define galaxy::instance (
     provider => git,
     source => $source,
     user => $name,
-    require => User[ $name ],
+    require => [ File["$base_dir" ] ],
   }
 
   user { "$name":
