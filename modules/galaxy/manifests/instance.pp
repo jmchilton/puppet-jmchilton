@@ -84,7 +84,7 @@ define galaxy::instance (
     ]
   }
 
-  file { "$web_dir/htaccess":
+  file { "$web_dir/.htaccess":
     content => template('galaxy/htaccess.erb'),
     owner   => "$name",
     require => [ File[$web_dir] ],
@@ -99,7 +99,7 @@ define galaxy::instance (
     port           => '80',
     docroot        => "$web_dir",
     directories    => $apache_directories,
-    require        => File[ "$web_dir/htaccess" ],
+    require        => File[ "$web_dir/.htaccess" ],
   }
 
   file { "$base_dir/run.sh":
