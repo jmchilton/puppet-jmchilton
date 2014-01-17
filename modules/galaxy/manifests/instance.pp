@@ -39,6 +39,11 @@ define galaxy::instance (
     ],
   }
 
+  file { "$base_dir":
+    ensure => present,
+    require => [Exec["$name user homedir"]],
+  }
+
   file { "$conf_dir":
     ensure => directory,
     require => [
