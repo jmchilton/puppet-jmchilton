@@ -81,7 +81,7 @@ define galaxy::instance (
 
   apache::vhost { "${name}.jmchilton.net":
     port           => '80',
-    docroot        => "web_dir",
+    docroot        => "$web_dir",
     require        => File[ "$web_dir/htaccess" ],
   }
 
