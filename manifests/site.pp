@@ -80,13 +80,28 @@ node 'jmchilton' {
 
   include apache::mod::php
 
+  $gx_password = extlookup('gx_admin_password', 'changeme')
+  $gx_users = [
+    { "email"    => "jmchilton@gmail.com",
+      "password" => $gx_password,
+      "api_key"  => $gx_password,
+    },
+    { "email"    => "john@jmchilton.net",
+      "password" => $gx_password,
+      "api_key"  => $gx_password,
+    },
+  ]
+  $gx_admin_users = "jmchilton@gmail.com"
+
   class { 'galaxy':
-    id_secret => extlookup('gx_id_secret', 'changeme'),
+    id_secret      => extlookup('gx_id_secret', 'changeme'),
     master_api_key => extlookup('gx_id_secret', 'changeme'),
+    admin_users    => $gx_admin_users,
   }
 
   galaxy::instance { "gx1":
-    port => 10080,
+    port  => 10080,
+    users => $gx_users,
   }
 
   package { 'php5':

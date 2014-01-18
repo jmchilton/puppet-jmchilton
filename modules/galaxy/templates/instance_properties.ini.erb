@@ -1,7 +1,9 @@
 [server:main]
-
 port=<%= @port %>
 
 [app:main]
-
 tool_dependency_dir=dependencies
+
+<% if @admin_users %>
+admin_users = <%= @admin_users %>
+<% end %>

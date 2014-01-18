@@ -1,3 +1,8 @@
 [app:main]
 id_secret=<%= @id_secret %>
+<% if @master_api_key %>
 master_api_key=<%= @master_api_key %>
+<% end %>
+<% if @admin_users %>
+admin_users = <%= @admin_users %>
+<% end %>

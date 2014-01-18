@@ -1,7 +1,8 @@
 
 class galaxy(
     $id_secret,
-    $master_api_key,
+    $master_api_key = undef,
+    $admin_users    = undef,
 ) {
 
     file { "/usr/share/galaxy":

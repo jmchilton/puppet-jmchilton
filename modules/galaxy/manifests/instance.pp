@@ -2,6 +2,8 @@
 define galaxy::instance (
     $port,
     $source      = "git://github.com/jmchilton/galaxy-central.git",
+    $users       = [],
+    $admin_users = undef,
 ) {
   if ! defined(Class['galaxy']) {
     fail('You must include the galaxy base class before creating any galaxy instances')
@@ -15,19 +17,19 @@ define galaxy::instance (
 
 
   vcsrepo { "$project_dir":
-    ensure => present,
+    ensure   => present,
     provider => git,
-    source => $source,
-    user => $name,
-    require => [ File["$base_dir" ] ],
+    source   => $source,
+    user     => $name,
+    require  => [ File["$base_dir" ] ],
   }
 
   user { "$name":
-    ensure => present,
-    comment => "www user for galaxy instance $name",
+    ensure     => present,
+    comment    => "www user for galaxy instance $name",
     membership => minimum,
-    shell => "/bin/bash",
-    home => "$base_dir",
+    shell      => "/bin/bash",
+    home       => "$base_dir",
   }
 
   exec { "$name user homedir":
@@ -45,6 +47,12 @@ define galaxy::instance (
     require => [Exec["$name user homedir"]],
   }
 
+  file { "$project_dir/seed.py":
+    content => template('galaxy/seed.py.erb'),
+    owner   => $name,    
+    require => Vcsrepo[$project_dir]
+  }
+
   file { "$conf_dir":
     ensure  => directory,
     owner   => "$name",
@@ -60,6 +68,7 @@ define galaxy::instance (
     require => [
         File[$conf_dir],
     ],
+    before => Exec["$name_config"],
   }
 
   file { "$conf_dir/200_puppet_instance_wsgi.ini":
@@ -68,16 +77,19 @@ define galaxy::instance (
     require => [
         File[$conf_dir],
     ],
+    before  => Exec["$name_config"],
   }
 
   file { "$conf_dir/100_puppet_site_wsgi.ini":
-    ensure => 'link',
-    target => "/usr/share/galaxy/site_wsgi.ini",
+    ensure  => 'link',
+    target  => "/usr/share/galaxy/site_wsgi.ini",
     owner   => "$name",
+    require => File["/usr/share/galaxy/site_wsgi.ini"],
+    before  => Exec["$name_config"],
   }
 
   file { $web_dir:
-    ensure => directory,
+    ensure  => directory,
     owner   => "$name",
     require => [
         File[$base_dir],
@@ -107,6 +119,34 @@ define galaxy::instance (
     owner   => "$name",
     require => [ File[$base_dir] ],
     mode    => 744,
+  }
+
+  exec { "${name}_config":
+    command => "python $project_dir/scripts/build_universe_config.py $conf_dir",
+    cwd     => "$project_dir",
+    creates => "$project_dir/universe_wsgi.ini",
+    require => [
+        User["$name"],
+        File["/usr/share/galaxy"],
+    ],
+  }
+
+  exec { "${name}_fetch_eggs":
+    command => "python scripts/fetch_eggs.py",
+    cwd     => "$project_dir",
+    require => Exec["${name}_config"],
+  }
+
+  exec { "${name}_create_db":
+    command => "sh create_db.sh",
+    cwd     => "$project_dir",
+    require => Exec["${name}_fetch_eggs"],
+  }
+
+  exec { "${name}_seed_db":
+    command => "python seed.py",
+    cwd     => "$project_dir",
+    require => Exec["${name}_create_db"],
   }
 
 }
