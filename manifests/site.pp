@@ -84,12 +84,12 @@ node 'jmchilton' {
   $gx_user_password  = extlookup('gx_user_password', 'changem')
   $gx_users = [
     { "email"    => "jmchilton@gmail.com",
-      "password" => $gx_password,
-      "api_key"  => $gx_password,
+      "password" => $gx_admin_password,
+      "api_key"  => $gx_admin_password,
     },
     { "email"    => "john@jmchilton.net",
-      "password" => $gx_password,
-      "api_key"  => $gx_password,
+      "password" => $gx_user_password,
+      "api_key"  => $gx_user_password,
     },
   ]
   $gx_admin_users = "jmchilton@gmail.com"
