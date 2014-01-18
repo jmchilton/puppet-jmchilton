@@ -68,7 +68,7 @@ define galaxy::instance (
     require => [
         File[$conf_dir],
     ],
-    before => Exec["$name_config"],
+    before => Exec["${name}_config"],
   }
 
   file { "$conf_dir/200_puppet_instance_wsgi.ini":
@@ -77,7 +77,7 @@ define galaxy::instance (
     require => [
         File[$conf_dir],
     ],
-    before  => Exec["$name_config"],
+    before  => Exec["${name}_config"],
   }
 
   file { "$conf_dir/100_puppet_site_wsgi.ini":
@@ -85,7 +85,7 @@ define galaxy::instance (
     target  => "/usr/share/galaxy/site_wsgi.ini",
     owner   => "$name",
     require => File["/usr/share/galaxy/site_wsgi.ini"],
-    before  => Exec["$name_config"],
+    before  => Exec["${name}_config"],
   }
 
   file { $web_dir:
