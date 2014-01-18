@@ -122,7 +122,7 @@ define galaxy::instance (
   }
 
   exec { "${name}_config":
-    command => "python $project_dir/scripts/build_universe_config.py $conf_dir",
+    command => "/usr/bin/python $project_dir/scripts/build_universe_config.py $conf_dir",
     cwd     => "$project_dir",
     creates => "$project_dir/universe_wsgi.ini",
     require => [
@@ -132,22 +132,21 @@ define galaxy::instance (
   }
 
   exec { "${name}_fetch_eggs":
-    command => "python scripts/fetch_eggs.py",
+    command => "/usr/bin/python scripts/fetch_eggs.py",
     cwd     => "$project_dir",
     require => Exec["${name}_config"],
   }
 
   exec { "${name}_create_db":
-    command => "sh create_db.sh",
+    command => "/bin/sh create_db.sh",
     cwd     => "$project_dir",
     require => Exec["${name}_fetch_eggs"],
   }
 
   exec { "${name}_seed_db":
-    command => "python seed.py",
+    command => "/usr/bin/python seed.py",
     cwd     => "$project_dir",
     require => Exec["${name}_create_db"],
   }
 
-  Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
 }
