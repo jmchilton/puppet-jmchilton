@@ -129,24 +129,28 @@ define galaxy::instance (
         User["$name"],
         File["/usr/share/galaxy"],
     ],
+    user    => "$name"
   }
 
   exec { "${name}_fetch_eggs":
     command => "/usr/bin/python scripts/fetch_eggs.py",
     cwd     => "$project_dir",
     require => Exec["${name}_config"],
+    user    => "$name"
   }
 
   exec { "${name}_create_db":
     command => "/bin/sh create_db.sh",
     cwd     => "$project_dir",
     require => Exec["${name}_fetch_eggs"],
+    user    => "$name"
   }
 
   exec { "${name}_seed_db":
     command => "/usr/bin/python seed.py",
     cwd     => "$project_dir",
     require => Exec["${name}_create_db"],
+    user    => "$name"
   }
 
 }

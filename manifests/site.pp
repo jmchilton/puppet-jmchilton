@@ -80,7 +80,8 @@ node 'jmchilton' {
 
   include apache::mod::php
 
-  $gx_password = extlookup('gx_admin_password', 'changeme')
+  $gx_admin_password = extlookup('gx_admin_password', 'changeme')
+  $gx_user_password  = extlookup('gx_user_password', 'changem')
   $gx_users = [
     { "email"    => "jmchilton@gmail.com",
       "password" => $gx_password,
