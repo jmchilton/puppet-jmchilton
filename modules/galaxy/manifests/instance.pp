@@ -149,4 +149,5 @@ define galaxy::instance (
     require => Exec["${name}_create_db"],
   }
 
+  Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
 }
