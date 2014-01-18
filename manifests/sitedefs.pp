@@ -42,7 +42,7 @@ class dev_machine {
   package { 'libssl-dev':
   }
 
-  package { 'virtualenv':
+  package { 'python-virtualenv':
   }
 
   package { 'python3':
