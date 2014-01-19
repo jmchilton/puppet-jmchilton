@@ -29,7 +29,7 @@ define galaxy::instance (
   file { "$project_dir/static/${name}_welcome.html":
     content => template('galaxy/welcome.html.erb'),  
     owner   => $name,
-    require => Vscrepo["$project_dir"],
+    require => Vcsrepo["$project_dir"],
   }
 
   user { "$name":
