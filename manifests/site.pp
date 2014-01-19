@@ -101,8 +101,9 @@ node 'jmchilton' {
   }
 
   galaxy::instance { "gx1":
-    port  => 10080,
-    users => $gx_users,
+    port   => 10080,
+    users  => $gx_users,
+    branch => "multitools",
   }
 
   package { 'php5':

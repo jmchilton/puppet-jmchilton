@@ -2,8 +2,10 @@
 define galaxy::instance (
     $port,
     $source      = "git://github.com/jmchilton/galaxy-central.git",
+    $branch      = "master",
     $users       = [],
     $admin_users = undef,
+    $brand       = undef,
 ) {
   if ! defined(Class['galaxy']) {
     fail('You must include the galaxy base class before creating any galaxy instances')
@@ -15,13 +17,19 @@ define galaxy::instance (
   $web_dir     = "${base_dir}/web"
   $conf_dir    = "${base_dir}/config"
 
-
   vcsrepo { "$project_dir":
     ensure   => present,
     provider => git,
     source   => $source,
     user     => $name,
-    require  => [ File["$base_dir" ] ],
+    revision => $branch,
+    require  => File["$base_dir" ],
+  }
+
+  file { "$project_dir/static/${name}_welcome.html":
+    content => template('galaxy/welcome.html.erb'),  
+    owner   => $name,
+    require => Vscrepo["$project_dir"],
   }
 
   user { "$name":
@@ -50,7 +58,7 @@ define galaxy::instance (
   file { "$project_dir/seed.py":
     content => template('galaxy/seed.py.erb'),
     owner   => $name,    
-    require => Vcsrepo[$project_dir]
+    require => Vcsrepo[$project_dir],
   }
 
   file { "$conf_dir":

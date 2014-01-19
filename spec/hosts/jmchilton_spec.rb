@@ -54,5 +54,4 @@ describe 'jmchilton' do
   it { should contain_file('/usr/share/galaxy/gx1/config')
   }
 
-
 end
