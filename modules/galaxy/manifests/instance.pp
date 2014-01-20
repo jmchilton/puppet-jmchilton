@@ -117,9 +117,10 @@ define galaxy::instance (
 
   apache::vhost { "${name}.jmchilton.net":
     port           => '80',
-    docroot        => "$web_dir",
+    docroot        => $web_dir,
     directories    => $apache_directories,
     require        => File[ "$web_dir/.htaccess" ],
+    custom_fragment => template("galaxy/xsendfile_fragment.erb"),
   }
 
   file { "$base_dir/run.sh":
