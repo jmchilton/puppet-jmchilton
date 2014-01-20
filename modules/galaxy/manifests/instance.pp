@@ -32,6 +32,12 @@ define galaxy::instance (
     require => Vcsrepo["$project_dir"],
   }
 
+  file { "$project_dir/job_conf.xml":
+    content => template("galaxy/job_conf.xml.erb"),
+    owner   => $name,
+    require => Vcsrepo["$project_dir"],
+  }
+
   user { "$name":
     ensure     => present,
     comment    => "www user for galaxy instance $name",
@@ -120,7 +126,7 @@ define galaxy::instance (
     docroot        => $web_dir,
     directories    => $apache_directories,
     require        => File[ "$web_dir/.htaccess" ],
-    custom_fragment => template("galaxy/xsendfile_fragment.erb"),
+    custom_fragment => template("galaxy/galaxy_instance_fragment.erb"),
   }
 
   file { "$base_dir/run.sh":

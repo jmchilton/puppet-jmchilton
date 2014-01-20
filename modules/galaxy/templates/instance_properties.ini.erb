@@ -1,5 +1,30 @@
-[server:main]
-port=<%= @port %>
+[server:web0]
+use = egg:Paste#http
+port = <%= @port.to_i %>
+host = 127.0.0.1
+use_threadpool = true
+threadpool_workers = 7
+
+[server:web1]
+use = egg:Paste#http
+port = <%= @port.to_i + 1 %>
+host = 127.0.0.1
+use_threadpool = true
+threadpool_workers = 7
+
+[server:handler0]
+use = egg:Paste#http
+port = <%= @port.to_i + 5 %>
+host = 127.0.0.1
+use_threadpool = true
+threadpool_workers = 5
+
+[server:handler0]
+use = egg:Paste#http
+port = <%= @port.to_i + 6 %>
+host = 127.0.0.1
+use_threadpool = true
+threadpool_workers = 5
 
 [app:main]
 tool_dependency_dir=dependencies

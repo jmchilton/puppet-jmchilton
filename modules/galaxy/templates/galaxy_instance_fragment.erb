@@ -1,0 +1,10 @@
+
+<Location "/">
+    XSendFile on
+    XSendFilePath /
+</Location>
+
+<Proxy balancer://galaxy>
+    BalancerMember http://localhost:<%= @port %>
+    BalancerMember http://localhost:<%= @port.to_i + 1 %>
+</Proxy>
