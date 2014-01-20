@@ -1,4 +1,4 @@
-[server:web0]
+[server:main]
 use = egg:Paste#http
 port = <%= @port.to_i %>
 host = 127.0.0.1
@@ -19,7 +19,7 @@ host = 127.0.0.1
 use_threadpool = true
 threadpool_workers = 5
 
-[server:handler0]
+[server:handler1]
 use = egg:Paste#http
 port = <%= @port.to_i + 6 %>
 host = 127.0.0.1
