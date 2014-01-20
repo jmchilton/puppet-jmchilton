@@ -4,6 +4,8 @@ port=<%= @port %>
 [app:main]
 tool_dependency_dir=dependencies
 
+apache_xsendfile=True
+
 <% if @admin_users %>
 admin_users=<%= @admin_users %>
 <% end %>
