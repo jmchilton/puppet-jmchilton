@@ -80,6 +80,7 @@ node 'jmchilton' {
 
   include apache::mod::php
   include apache::mod::xsendfile
+  include apache::mod::proxy_balancer
 
   $gx_admin_password = extlookup('gx_admin_password', 'changeme')
   $gx_user_password  = extlookup('gx_user_password', 'changem')
