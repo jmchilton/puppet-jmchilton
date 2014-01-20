@@ -79,6 +79,7 @@ node 'jmchilton' {
   include apache::mod::alias
 
   include apache::mod::php
+  include apache::mod::xsendfile
 
   $gx_admin_password = extlookup('gx_admin_password', 'changeme')
   $gx_user_password  = extlookup('gx_user_password', 'changem')
