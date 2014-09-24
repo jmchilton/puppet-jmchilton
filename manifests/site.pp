@@ -80,7 +80,8 @@ node 'jmchilton' {
 
   include apache::mod::php
   include apache::mod::xsendfile
-  include apache::mod::proxy_balancer
+  # https://github.com/onehealth-cookbooks/apache2/commit/c2ab27e91a8e5a92c51263247515c03c5e3088b0
+  # include apache::mod::proxy_balancer
 
   #$gx_admin_password = extlookup('gx_admin_password', 'changeme')
   #$gx_user_password  = extlookup('gx_user_password', 'changem')
