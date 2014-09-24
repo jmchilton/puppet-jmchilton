@@ -25,7 +25,8 @@ class jmchilton-jenkins() {
     mode   => 0755,
   }
 
-  package { "openjdk-7-jdk":
-  }
+  # Probably don't need this anymore.
+  #package { "openjdk-7-jdk":
+  #}
 
 }
