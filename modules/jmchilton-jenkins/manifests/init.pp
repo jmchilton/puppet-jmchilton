@@ -1,3 +1,4 @@
+# Setup link for /var/lib/jenkins/.m2/settings.xml -> /data/java_config/settings.xml
 
 class jmchilton-jenkins() {
   $jenkins_port = '9000'
