@@ -10,9 +10,20 @@ class jmchilton-jenkins() {
 
   apache::vhost { 'jenkins.jmchilton.org':
     port           => '80',
-    proxy_dest     => "http://localhost:$jenkins_port",
+    #proxy_dest     => "http://localhost:$jenkins_port",
     docroot        => $web_dir,
   }
+
+  concat::fragment { "jenkins.jmchilton.org-proxy":
+    target  => '25-jenkins.jmchilton.org.conf',
+    order => 11,
+    content => '  ## Proxy rules
+  ProxyRequests Off
+  ProxyPass          / http://localhost:9000/ nocanon
+  ProxyPassReverse / http://localhost:9000/
+  AllowEncodedSlashes NoDecode'
+  }
+
 
   # Required for legacy tracking of galaxy-central at github.com/jmchilton/galaxy-central
   # newer version of git-export-hg produces different hashes.
