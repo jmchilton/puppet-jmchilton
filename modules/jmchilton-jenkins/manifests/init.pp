@@ -8,7 +8,7 @@ class jmchilton-jenkins() {
     config_hash => { 'HTTP_PORT' => { 'value' => $jenkins_port } },
   }
 
-  apache::vhost { 'jenkins.jmchilton.net':
+  apache::vhost { 'jenkins.jmchilton.org':
     port           => '80',
     proxy_dest     => "http://localhost:$jenkins_port",
     docroot        => $web_dir,

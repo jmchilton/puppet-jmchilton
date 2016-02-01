@@ -20,7 +20,7 @@ describe 'jmchilton' do
   end
 
   it "should set up blog alias" do
-    verify_contents(subject, '10-jmchilton.net.conf',
+    verify_contents(subject, '10-jmchilton.org.conf',
         ['  Alias /blog /data/blog',
          '  Alias /sqlinject /data/sqlinject'
         ]

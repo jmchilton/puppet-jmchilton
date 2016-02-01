@@ -61,7 +61,7 @@ node 'jmchilton' {
     mpm_module => 'prefork',
   }
 
-  apache::vhost { 'jmchilton.net':
+  apache::vhost { 'jmchilton.org':
     port           => '80',
     docroot        => $web_dir,
     aliases        => $root_apache_aliases,
